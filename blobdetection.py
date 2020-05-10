@@ -15,10 +15,38 @@ import numpy as np
 img=cv2.imread("blood.jpg")
 cv2_imshow(img);
 print("Processed Image")
-detector = cv2.SimpleBlobDetector_create()
+# Setup SimpleBlobDetector parameters.
+params = cv2.SimpleBlobDetector_Params()
+
+# Change thresholds
+params.minThreshold = 150;
+params.maxThreshold = 200;
+ 
+# Filter by Area.
+
+params.filterByArea = True
+params.minArea = 150
+# Filter by Circularity
+params.filterByCircularity = True
+params.minCircularity = 0.1
+# Filter by Convexity
+params.filterByConvexity = True
+params.minConvexity = 0.5
+# Filter by Inertia
+params.filterByInertia = True
+params.minInertiaRatio = 0.05
+# Create a detector with the parameters
+ver = (cv2.__version__).split('.')
+if int(ver[0]) < 3 :
+
+  detector = cv2.SimpleBlobDetector(params)
+
+else :
+
+  detector = cv2.SimpleBlobDetector_create(params)
+
 keypoints = detector.detect(img)
 im_with_keypoints = cv2.drawKeypoints(img, keypoints, np.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 Processed_img=im_with_keypoints;
-#Displaying Processed image
 cv2_imshow(Processed_img)
 cv2.waitKey(0)
