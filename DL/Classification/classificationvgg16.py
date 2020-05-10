@@ -89,8 +89,8 @@ add_model.add(Dense(256, activation='relu'))
 add_model.add(Dense(3, activation='softmax'))
 
 model = Model(inputs=base_model.input, outputs=add_model(base_model.output))
-model.compile(loss='binary_crossentropy', optimizer=optimizers.SGD(lr=0.0001, momentum=0.9),
-              metrics=['accuracy'])#binary_crossentropy categorical_crossentropy
+model.compile(loss='categorical_crossentropy', optimizer=optimizers.SGD(lr=0.0001, momentum=0.9),
+              metrics=['accuracy'])
 
 model.summary()
 
