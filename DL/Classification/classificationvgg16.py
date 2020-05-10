@@ -19,6 +19,7 @@ if device_name != '/device:GPU:0':
 print('Found GPU at: {}'.format(device_name))
 from tqdm import tqdm
 
+#Trained using GPU
 
 import numpy as np
 import matplotlib.pyplot as plt
